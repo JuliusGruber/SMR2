@@ -1,0 +1,411 @@
+html {
+  overflow: auto;
+}
+
+body{
+	margin:0;
+	top:0;	
+}
+
+.header{
+	width:100%;
+	height:30px;
+	background: white;	
+	border:solid;
+	border-width:0 0 1px 0;
+	border-color:#f6931f;
+	padding-top: 20px;
+	
+}
+
+.header .title{
+	font-family: 'Droid Sans',sans-serif;
+	color: #f6931f;
+	font-size:1em;
+	margin-left:20px;
+	
+}
+	
+.target{ 
+   position: relative; 
+}
+
+
+h2 { 
+   margin-bottom:0;
+   margin-top:0;
+}
+
+#seedArtistID{
+	display:none;
+}
+
+#seedsongID{
+	display:none;
+}
+
+#pageChangeFlag{
+	display:none;
+}
+
+#seedCatalogID{
+	display:none;
+}
+
+#styleTerm{
+	display:none;
+}
+
+ .ui-autocomplete {
+width: 170px;
+max-height: 400px;
+overflow-y: auto;
+/* prevent horizontal scrollbar */
+overflow-x: hidden;
+}
+
+.albumCoverContainer{
+	overflow: hidden;
+	/*border: 1px solid #a1a1a1;*/
+	/*float:left;*/
+	width:100%;
+	/* height:400px; */
+	
+}
+
+
+
+
+
+/* .rulerContainer{
+ 	display: inline-block; 
+ 	float:left; 
+	border: 1px solid #a1a1a1;
+	
+	border-radius : 5px;
+	
+	background:#dddddd;
+	 width:200px;
+	min-height : 850px;
+	max-height:100%;
+	spacing : 0px;
+	padding : 0px;
+	
+	
+}  */ 
+
+
+
+.yearInput{
+	width: 60px !important;
+}
+
+
+input  
+{ 
+border-radius: 5px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
+#excludeSeedArtistCheckBox{
+border-radius: 5px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;	
+	
+}
+/* .yearpick{
+	border-radius: 5px;
+-moz-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-border-radius: 5px;
+} */
+
+.afterLable{
+	margin-right : 8px;
+	
+}
+
+.Section{
+	display: inline-block;
+	
+	border: 1px solid #a1a1a1;
+	border-radius:5px;
+	background:#dddddd;
+/* 	width: 100%; */
+	height : 100%;
+	spacing : 0px;
+	padding : 5px;
+	/* margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 3px; */
+/* 	margin : 5px; */
+}
+
+
+.popularitySection{
+	width:250px;
+	height:185px;
+	
+}
+
+
+.diversitySection{
+	width: 225px; 
+	height: 100px;
+}
+
+
+
+
+.yearSection{
+	height: 185px;
+	width: 167px;
+	
+}
+
+.main{
+	overflow: hidden;
+	
+	
+}
+
+
+
+
+.main-wrapper{
+	width:960px;
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+	/* padding : 10px; */
+	
+}
+
+.coverAndPlaylistArea{
+	text-align:center;
+}
+
+.main .coverAndPlaylistArea{
+	width:100%;
+	float:left;
+	
+}
+
+
+
+
+.throbberContainer{
+/* 	height:100%; */
+/* 	width:100%; */
+	
+	
+}
+
+#throbberInfo{
+	padding-bottom: 50px;
+	margin: 0 auto;
+}
+
+.holder{
+	margin-left:auto;
+	margin-right:auto;	
+	position:center;
+	width:100%;
+	text-align:center;
+}
+
+
+#similarityInfo{
+	padding-left: 125px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.similaritySection  { 
+	display: inline-box;
+	float:left; 
+	clear:none; 
+	width:922px;
+	height: 50px;
+	border: 1px solid #a1a1a1;
+	border-radius:5px;
+	background:#dddddd;
+	
+	margin-left: 2px; 
+	margin-bottom:5px; 
+	padding: 5px;
+
+}
+
+#formSimilaritySection{
+	margin-top: 5px;
+}
+
+
+
+
+.guiContainer2{
+	display:box;
+	float:left; 
+	width:940px;
+	height: 480px;
+	border: 1px solid #a1a1a1;
+	border-radius:5px;
+	background:#dddddd;
+	margin-bottom:10px;
+	margin-left: 5px;
+	
+	padding: 5px; 
+}
+
+.noveltySection{
+	display:box;
+	float: left;
+	height: 100px;
+width: 215px; 
+margin-left: 5px;
+}
+
+
+
+.playlistHeader button{
+	float:right;
+}
+
+
+.playlistContainer .playlistinfo{
+	padding: 10px;
+}
+
+
+
+	
+#similarityLabel{ float:left; clear:none; display:block; padding: 2px 1em 0 0; padding-left: 5px;}
+input[type=radio], input.radio { float:left; clear:none; margin: 2px 0 0 2px; }
+
+
+/* 
+#nextSongsButton, #changeSeedArtist, #changeSeedSong{
+	background:#f5f5f5;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 3px;	
+} */
+
+
+
+
+#flipbutton{
+	color:red;
+	margin-left:auto;
+	margin-right:auto;
+	position: relative;
+
+	z-index:11111;
+	text-decoration:none;
+	height:20px;
+	background-color: inherit;
+}
+
+#flipbuttonwrapper{
+	margin-left:auto;
+	margin-right:auto;
+	position: relative;
+	text-align: center;
+	margin-bottom:5px;
+	}
+
+
+
+
+
+.ui-slider-tick-mark{
+    display:inline-block;
+    width:1px;
+    background:grey;
+    height:100%;
+    position:absolute;
+    
+}
+
+.sliderClass{
+ margin-left:10px;
+margin-right:10px;	 
+}
+
+
+#offLabel{
+	float: left;
+	margin-right: 30px;
+}
+#lowLabel{
+	float: left;
+	margin-right: 150px;
+}
+
+
+#lowLabelDiversity{
+	float: left;
+	margin-left: 10px;
+	margin-right: 160px;
+}
+
+#highLabelDiversity{
+	
+}
+
+.simButton{
+	margin: 0px !important;
+	border: 2px solid #a1a1a1 !important;
+	border-radius: 5px;
+	
+}
+
+#nextSongsButton{
+	width: 476px;
+	height: 55px;
+	margin-left: 5px !important;
+	border: 2px solid #a1a1a1;
+	border-radius: 5px;
+}
+
+/* #offLabel{
+	align: left;
+	text-align: left;
+	line-height:2;
+	
+}
+ */
+
+#subscribebutton{
+	float:right;
+	border: 2px solid #a1a1a1;
+	border-radius: 5px;
+}
+
+#infobutton{
+	display:inline-block;
+	}
+	
+	.ui-tooltip
+{
+    /* tooltip container box */
+    max-width: 1000px !important;
+}
+.ui-tooltip-content
+{
+    /* tooltip content */
+    max-width: 1000px !important;
+}
+
+
+#slider-songHot .ui-slider-handle { border: 2px solid #a1a1a1;}
+#slider-hot .ui-slider-handle { border: 2px solid #a1a1a1;}
+#slider-pop .ui-slider-handle { border: 2px solid #a1a1a1;}
+#adventurousnessSlider .ui-slider-handle { border: 2px solid #a1a1a1;}
+#artistVarietySlider .ui-slider-handle { border: 2px solid #a1a1a1;}
+

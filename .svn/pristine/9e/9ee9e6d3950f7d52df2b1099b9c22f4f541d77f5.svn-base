@@ -1,0 +1,131 @@
+/**
+ * Handler for the Genre similarity mode.
+ * Sets up genre list, handles selection.
+ */
+
+require([
+  '$api/models',
+  'scripts/echonestDynamic',
+  'scripts/apiKey'
+ 
+], function(models,echonestDynamic, apiKey ) {
+  'use strict';
+
+  	var setupGenreFilter = function() {
+  		setupGenreFilter1(echonestDynamic, apiKey);
+  	};
+
+  	exports.setupGenreFilter = setupGenreFilter;
+
+});//end require********************************************************************
+
+	var genreArray = new Array();
+	var echonestApiKey = null;
+
+	function setupGenreFilter1(echonestDynamic, apiKey){
+	
+		console.log('setupGenreFilter() was called');
+		echonestApiKey = apiKey.getApiKey();
+		getAllEchonestGenres(echonestDynamic);
+	
+	}
+
+
+	function getAllEchonestGenres(echonestDynamic){
+		
+		var randomNumber =  Math.floor(Math.random()*100);
+		var genreQueryUrl ='http://developer.echonest.com/api/v4/artist/list_genres?api_key='+echonestApiKey+'&format=json&_='+randomNumber;
+	
+		var genreArray = new Array();
+	
+		$.getJSON(
+				genreQueryUrl,
+				{ },
+				function(genreData) {
+					if (checkResponse(genreData)) {
+	            	
+						for (var i = 0; i < genreData.response.genres.length; i++) {
+	            			genreArray.push(genreData.response.genres[i].name);
+	            		}
+	                
+						$( "#tags" ).autocomplete({
+							minLength: 0,
+							appendTo: '.similaritySection',  
+						    open: function() { $('.similaritySection .ui-menu').width(166)},
+							source: genreArray,
+							
+							select: function( event, ui){
+	           			
+								console.log('EventHandler Genre List sent event');
+								//resetSliders();
+								document.getElementById('tags').value=ui.item.label; 
+								echonestDynamic.changeToGenreSimilarity( ui.item.label);
+	           			 
+								$(this).blur(); 
+								 return false;
+							}
+	           		
+	           		 	}).focus(function(){
+	           		 		document.getElementById('tags').value=''; 
+	           		 		$(this).autocomplete('search', $(this).val());
+	           		 	});
+	                
+					}
+				});
+	
+	  
+	  //when enter key is pressed down, select if it is in genre array
+	  $( "#tags" ).keydown(function(event) {
+		  
+		  if(event.keyCode == 13) {
+			  console.log( "SETUP GENERE FILTER enter key was pressed down" );
+				
+			  //get the current text written into the form field
+			  var currentText =  $( "#tags" ).val();
+
+			  //check if it is the genre array
+			  if(jQuery.inArray( currentText, genreArray)!= -1){
+				  console.log("SETUP GENERE FILTER  entered text matches genre name: "+ currentText)
+				  //resetSliders();
+				   $( "#tags" ).val(currentText);
+				  echonestDynamic.changeToGenreSimilarity(currentText);
+				 
+				  //$( "#tags" ).blur();
+			  }
+				
+		  }
+		  
+	  });
+	  
+	}
+
+
+/*	function resetSliders(){
+		
+		$("#slider-songHot").slider( "value", 0 );
+		$("#slider-songHot").slider( "option", "disabled", true );
+		$("#slider-hot").slider( "value", 0 );
+		$("#slider-hot").slider( "option", "disabled", true );
+		$("#slider-pop").slider( "value", 0 );
+		$("#slider-pop").slider( "option", "disabled", true );
+		$("#artistVarietySlider").slider( "value", 50 );
+		$('.yearInput').val('off');
+		$("#excludeSeedArtistCheckBox").prop('checked', false);
+		$("#excludeSpotifyPlaylistSongsCheckBox").prop('checked', false);
+	
+	}*/
+
+
+	function checkResponse(data) {
+		if (data.response) {
+			if (data.response.status.code != 0) {
+				info("Whoops... Unexpected error from server. " + data.response.status.message);
+				console.log(JSON.stringify(data.response));
+			} else {
+				return true;
+			}
+		} else {
+			error("Unexpected response from server");
+		}
+		return false;
+	}

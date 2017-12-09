@@ -1,0 +1,165 @@
+/**
+ * Setup the "switch view" button.
+ * Switches between cover and playlist views.
+ * Handles pagination.
+ */
+
+require([
+  '$api/models',
+  'scripts/customplaylist'
+
+], function(models, customplaylist) {
+  'use strict';
+  
+  
+  var setupFlipButton = function(){
+	  setupFlipButton1(customplaylist);
+  };
+  
+
+  var newCoverPage = function(){
+	  newCoverPage1(customplaylist);
+  };
+
+
+  exports.setupFlipButton = setupFlipButton;
+  exports.newCoverPage = newCoverPage;
+  
+});//end require
+
+var currentpageCover = 1;
+var currentpagePlaylist = 1;
+var pageCount = 1;
+//var wasPageChange = false;
+
+
+/**
+ * setup switch view button
+ * @param customplaylist
+ */
+function setupFlipButton1(customplaylist){
+	console.log("flip button setup");
+	
+	var flipbutton = document.getElementById('flipbutton');
+	$('#flipbutton').text("show playlist");
+	 
+	flipbutton.onclick=function(){
+		
+		  
+		if( $('#playlistContainer').is(':hidden') ) { // if covers are front switch to playlist view
+		 
+			$('#flipbutton').text("show covers");
+			
+			console.log("playlist is front");
+			
+			//show and hide appropriate views
+			$('#playlistHeader').show();
+			$('#subscribebutton').show();
+			$('#albumCoverContainer').hide();
+			$('#playlistContainer').show();
+
+			//rebuild playlist pagination
+			$("#holder").jPages("destroy").jPages({
+				containerID   : "playlistContainer",
+				perPage       :2,
+				first       : "first",
+				previous    : "previous",
+				next        : "next",
+				last        : "last",
+				
+				animation   : "fadeIn",
+				midRange	: 30,
+				callback    : function( pages,items ){
+					console.log("playlist on page: "+pages.current);
+					currentpagePlaylist = pages.current;
+					//$('#pageChangeFlag').text('pageWasChanged');
+					//tell the playlist handler which playlist is shown in case of saving
+					customplaylist.setActivePage(currentpagePlaylist);
+				}
+			
+			});
+				
+			console.log("playlist pagination to set: "+currentpageCover);
+			
+			//update pagination control
+			$("#holder").jPages( currentpageCover );
+			currentpagePlaylist = currentpageCover;
+			  
+		}
+		else{// if playlist view is front swith to covers view
+			
+			$('#flipbutton').text("show playlist");
+			
+			console.log("covers are front");
+			  
+			//show and hide gui elements
+			$('#playlistContainer').hide();
+			$('#albumCoverContainer').show();
+			$('#playlistHeader').hide();
+			$('#subscribebutton').hide();
+			 
+			//rebuild pagination
+			$("#holder").jPages("destroy").jPages({
+				containerID   : "albumCoverContainer",
+				perPage       :13,
+				first       : "first",
+				previous    : "previous",
+				next        : "next",
+				last        : "last", 
+                 
+				animation   : "fadeIn",
+				midRange	: 30,
+				callback    : function( pages,items ){
+					console.log("covers on page: "+pages.current);
+					currentpageCover = pages.current;
+					console.log("current cover page: "+currentpageCover);
+					//$('#pageChangeFlag').text('pageWasChanged');
+					customplaylist.setActivePage(currentpageCover);
+				}
+  		   	
+			});
+			  
+			//update pagination controls
+			console.log("cover pageination to set: "+currentpagePlaylist);
+			$("#holder").jPages( currentpagePlaylist );
+			currentpageCover = currentpagePlaylist;
+		}
+		
+	}
+	  
+}
+
+/**
+ * add a new cover page when covers are added.
+ * called by jPagesTrackCover script.
+ */
+function newCoverPage1(customplaylist){
+	//show covers
+	$('#albumCoverContainer').show();
+	$('#playlistContainer').hide();
+	$('#playlistHeader').hide();
+	$('#subscribebutton').hide();
+	 
+	//update cover pagination
+	$("#holder").jPages("destroy").jPages({
+		containerID   : "albumCoverContainer",
+		perPage       :13,
+		first       : "first",
+		previous    : "previous",
+		next        : "next",
+		last        : "last", 
+		animation   : "fadeIn",
+		midRange	: 30,
+		callback    : function( pages,items ){
+			console.log("new covers on page: "+pages.current);
+			currentpageCover = pages.current;
+			
+			customplaylist.setActivePage(currentpageCover);
+		}
+	});
+  
+	//update pagination controls
+	$("#holder").jPages( pageCount );
+	pageCount= pageCount+1;
+	
+}

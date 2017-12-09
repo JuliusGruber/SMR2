@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+#tagCloud {
+/* 	margin-left:8px;*/
+	margin-top:5px;
+
+	min-height: 180px;
+	max-height:100%;
+	width: 910px;
+	background:#dddddd;
+	border: 1px solid #a1a1a1;
+	border-radius: 5px;
+	
+	/*border-bottom: 1px solid #a1a1a1;
+	border-left: 1px solid #a1a1a1;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	/*padding: 10px;*/
+	font: 75% Arial, "MS Trebuchet", sans-serif;
+	/*float:left;*/
+	z-index:1;
+	padding: 10px;
+}
+
+.tagcloudlink {
+	text-decoration: none;
+	color: #666667;
+	font-weight: bold;
+	margin: auto;
+}
+
+.tagcloudlink:hover {
+	text-decoration: underline;
+}
+
+.tagcloudlink.active {  
+	color: LawnGreen; 
+	}
+
+.tagcloud-wrapper{
+	float:left;
+	overfloaw:hiden;
+}
+
+
+a.tagCloud span
+{
+  display: none;
+}
+
+a.tagCloud:hover span
+{
+ 
+  display: block;
+  border: 1px solid #ddd; border-radius:4px;
+  background: #efefef;
+  font: 75% Arial, "MS Trebuchet", sans-serif;
+  width:10%;
+
+}	
+
+
